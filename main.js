@@ -1,5 +1,4 @@
 // BANCOCODER DE CARLOS FLORES JAVASCRIPT COMISION 49770
-
 document.addEventListener("DOMContentLoaded", function () {
     let cuentas = [
         {
@@ -10,18 +9,17 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         {
             nombre: "Nesmar",
-            apellido: "Arias",
-            dni: "12345678",
-            saldo: 1500,
+            apellido: "ApellidoNesmar",
+            dni: "87654321",
+            saldo: 2000,
         },
     ];
-
-    // CAMBIANDO LA CUENTA ACTUAL SE PUEDE ACCEDER AL SALDO DE CARLOS O DE NESMAR
-    // CARLOS = 0
-    // NESMAR = 1
-    let cuentaActual = 0;//<--AQUI SE PUEDE CAMBIAR LOS QUE ESTAN GUARDADOS EN EL ARRAY
+// CAMBIANDO LA CUENTA ACTUAL SE PUEDE ACCEDER AL SALDO DE CARLOS O DE NESMAR
+// CARLOS = 0
+// NESMAR = 1
+    let cuentaActual = 0;
     let retiroInput = document.getElementById('retiro-input');
-    let saldoElement = document.getElementById('saldo');
+    let saldoElement = document.getElementById('saldo-valor'); // Modificado para actualizar el valor directamente
     let retirarBtn = document.getElementById('retirar-btn');
 
     actualizarSaldo();
@@ -34,31 +32,40 @@ document.addEventListener("DOMContentLoaded", function () {
         let retiroAmount = parseInt(retiroInput.value);
 
         if (isNaN(retiroAmount) || retiroAmount <= 0) {
-            alert("Ingrese un monto válido.");
+            mostrarMensaje("Ingrese un monto válido.");
             return;
         }
-// CUANDO EL SALDO EN PANTALLA SEA MENOR!!! DIRA UN AVISO DE "SALDO INSUFICIENTE"
+// MENSAJE DE SALDO INSUFICIENTE!
         if (retiroAmount > cuentas[cuentaActual].saldo) {
-            alert("Saldo insuficiente.");
+            mostrarMensaje("Saldo insuficiente.");
         } else {
             cuentas[cuentaActual].saldo -= retiroAmount;
             actualizarSaldo();
-            alert("Retiro exitoso. Saldo actual: $" + cuentas[cuentaActual].saldo);
+            mostrarMensaje("Retiro exitoso. Saldo actual: $" + cuentas[cuentaActual].saldo);
         }
     }
 
     function actualizarSaldo() {
-        saldoElement.textContent = "Saldo actual: $" + cuentas[cuentaActual].saldo;
+        saldoElement.textContent = cuentas[cuentaActual].saldo;
         guardarSaldo();
     }
-    // FUNCION PARA OBTENER EL SALDO!!
+
     function obtenerSaldo() {
         let saldoGuardado = localStorage.getItem('saldo');
         return saldoGuardado ? parseInt(saldoGuardado) : null;
     }
-
-    // FUNCION PARA GUARDAR EL SALDO!!!
+// FUNCION PARA GUARDAR EL SALDO! ATENTO A LA CUENTA ACTUAL!
     function guardarSaldo() {
         localStorage.setItem('saldo', cuentas[cuentaActual].saldo.toString());
+    }
+// FUNCION PARA MOSTRAR EL MENSAJE EN PANTALLA!!
+    function mostrarMensaje(mensaje) {
+        let mensajeElement = document.createElement('p');
+        mensajeElement.textContent = mensaje;
+        document.getElementById('cajero').appendChild(mensajeElement);
+// TIEMPO ESTIMADO!!. 
+        setTimeout(function() {
+            mensajeElement.remove();
+        }, 3000);
     }
 });

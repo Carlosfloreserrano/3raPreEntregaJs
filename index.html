@@ -3,19 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BancoCoder</title>
+    <link rel="stylesheet" href="estilos.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <title>Cajero BanCoder</title>
 </head>
 <body>
 
 <div id="cajero">
-    <h1>Cajero BancoCoder</h1>
-    <p id="saldo">Saldo actual: $1000</p>
-    <label for="retiro-input">Monto a retirar:</label>
-    <input type="number" id="retiro-input" placeholder="Ingrese el monto">
-    <br>
-    <button id="retirar-btn">Retirar</button>
-</div>
-
+    <h1>Cajero BanCODER</h1>
+    <div id="pantalla">
+        <!-- PANTALLA DE CAJERO BANCODER -->
+        <p id="saldo">Saldo actual: $<span id="saldo-valor">1000</span></p>
+        <label for="retiro-input">Monto a retirar:</label>
+        <input type="number" id="retiro-input" placeholder="Ingrese el monto">
+        <br>
+        <button id="retirar-btn">Retirar</button>
+    </div>
 <script src="main.js"></script>
+
 </body>
 </html>
